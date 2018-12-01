@@ -5,10 +5,20 @@ from django.contrib.auth.models import User
 
 class Profile(models.Model):
     #attributes definition
-    user = models.OneToOneField(User, on_delete = models.CASCADE)
+    user = models.OneToOneField(User, on_delete = models.CASCADE, primary_key = True)
     phone = models.CharField(max_length=12)
     postal_code = models.IntegerField(null=False)
     birthday = models.DateField()
+    friends = models. ManyToManyField('self', through='Friend', symmetrical=False)
+    
+    def __str__(self):
+        return self.user
+
+class Friend(models.Model):
+    user = models.ForeignKey(Profile, related_name='related_user', on_delete = models.CASCADE)
+    friend = models.ForeignKey(Profile, related_name='friend', on_delete = models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+    modified_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.user
