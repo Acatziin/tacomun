@@ -12,7 +12,7 @@ class Profile(models.Model):
     friends = models. ManyToManyField('self', through='Friend', symmetrical=False)
     
     def __str__(self):
-        return self.user
+        return self.user.username
 
 class Friend(models.Model):
     user = models.ForeignKey(Profile, related_name='related_user', on_delete = models.CASCADE)
