@@ -31,12 +31,13 @@ class Category(models.Model):
 
 class Place(models.Model):
     #attributes definition
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     name = models.CharField(max_length=45, unique=True, null=False)
     state = models.CharField(max_length=45)
     city = models.CharField(max_length=45)
     postal_code = models.IntegerField(null=False)
     categories = models.ManyToManyField(Category) #Creación de relación muchos a muchos simple
-    eval = models.ManyToManyField(User, through='EvalPlace') #Relación muchos a muchos a través de una tercer tabla
+    evaluations = models.ManyToManyField(User, through='EvalPlace', related_name='evaluations') #Relación muchos a muchos a través de una tercer tabla
 
     def __str__(self):
         return self.name

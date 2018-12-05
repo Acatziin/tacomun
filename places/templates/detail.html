@@ -1,10 +1,16 @@
 {% extends 'base.html' %}
 
-{% block title %} {{place.name}} {% endblock %}
+{% block title %} Hola {% endblock %}
 
 {% block content %}
     <p>{{ place.name}}</p>
+
     <p>{{ place.state }}</p>
     <p>{{ place.city }}</p>
     <p>C.P. {{ place.postal_code }}</p>
+
+    <button><a href="{% url 'edit_place' place.id %}">Editar</a></button>
+    <button><a href="{% url 'delete_place' place.id %}">Borrar</a></button>
+    <br><button><a href="{% url 'index' %}">Inicio</a></button>
 {% endblock %}
+
