@@ -11,8 +11,8 @@
 <form method="POST">
     {%csrf_token %}
     {{ form.as_p}}
-    <button type = "submit">Actualizar</button>
+    <button class="btn btn-primary" type = "submit">Actualizar</button>
     
 </form>
 
-<button href="{% url 'home' %}">Inicio</button>
+<button><a class="btn btn-primary" role="button" href="{% url 'index' %}">Inicio</a></button>

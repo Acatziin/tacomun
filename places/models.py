@@ -35,7 +35,7 @@ class Place(models.Model):
     name = models.CharField(max_length=45, unique=True, null=False)
     state = models.CharField(max_length=45)
     city = models.CharField(max_length=45)
-    postal_code = models.IntegerField(null=False)
+    postal_code = models.PositiveIntegerField(null=False)
     categories = models.ManyToManyField(Category) #Creación de relación muchos a muchos simple
     evaluations = models.ManyToManyField(User, through='EvalPlace', related_name='evaluations') #Relación muchos a muchos a través de una tercer tabla
 

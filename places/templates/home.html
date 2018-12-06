@@ -1,22 +1,28 @@
 {% extends 'base.html' %}
 
-{% block title %} Home {% endblock %}
+{% block title %} 
+Inicio
+{% endblock %}
 
 {% block content %}
     {% if user.is_authenticated %}
         <h2>Hola {{user.username }}!</h2>
-        <button><a href="{% url 'logout' %}">logout</a></button>
-        <button><a href="place/create/">Dar de alta un puesto de garnachas</a></button>
+        <button><a class="btn btn-primary" href="{% url 'logout' %}" role="button">Cerrar sesión</a></button>
+        <button><a class="btn btn-primary" href="place/create/" role="button">Dar de alta un puesto de garnachas</a></button>
+        <br>
         {% if places%}
             {% for place in places %}
+                <br>
                 <ul>
                     <li>{{place.name}} en {{place.city}}</li>
-                    <button><a href="place/detail/{{place.id}}">detalles</a></button>
+                    <button><a class="btn btn-primary btn-sm" href="place/detail/{{place.id}}" role="button">detalles</a></button>
                 </ul>
             {% endfor %}
         {% endif %}
     {% else %}
-        <p>No has iniciado sesión</p>
-        <a href="{% url 'login' %}">login</a>
+        <h2>Aún no has iniciado sesión</h2>
+        <button><a class="btn btn-primary" href="{% url 'login' %}" role="button">Iniciar sesión</a></button>
+        <p> </p> 
+        <button><a class="btn btn-primary" href="{% url 'signup' %}" role="button">Registrar nuevo usuario</a></button>
     {% endif %}
 {% endblock %}

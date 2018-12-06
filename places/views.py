@@ -37,7 +37,7 @@ def create_place(request):
         return redirect('login')
 
 def edit_place(request, place_id):
-    place = Place.objects.get(id=place_id)
+    place = place.objects.get(id=place_id)
     if request.user.is_authenticated:
         if request.method == 'POST':
             form = PlaceForm(request.POST, instance=place)
@@ -53,16 +53,9 @@ def edit_place(request, place_id):
 
 
 def delete_place(request, place_id):
-    place = Place.objects.get(id=place_id)
+    place = place.objects.get(id=place_id)
     if request.user.is_authenticated:
-        if request.method == 'POST':
-            form = PlaceForm(request.POST, instance=place)
-            if form.is_valid():
-                place = form.save(commit = False)
-                place.save()
-                return redirect('index')
-        else:
-            form = PlaceForm(instance=place)
-        return render(request, 'edit_place.html', {'form':form})  
+        place.delete()
+        return render(request, 'delete_place.html')
     else:
         return redirect('login')
