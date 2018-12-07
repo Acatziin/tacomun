@@ -9,7 +9,7 @@ urlpatterns = [
     path('place/delete/<int:place_id>', views.delete_place, name = 'delete_place'),
     path('place/detail/add_evaluation/<int:place_id>', views.add_evaluation, name = 'add_evaluation'),
     path('place/detail/view_evaluation/<int:place_id>', views.view_evaluation, name = 'view_evaluation'),
-    path('place/detail/delete_evaluation/', views.delete_evaluation, name = 'delete_evaluation'),
-    path('place/detail/edit_evaluation/', views.edit_evaluation, name = 'edit_evaluation')
+    path('place/detail/delete_evaluation/<int:evalplace_id', views.delete_evaluation, name = 'delete_evaluation'),
+    path('place/detail/edit_evaluation/<int:evalplace_id', views.edit_evaluation, name = 'edit_evaluation')
     
 ]

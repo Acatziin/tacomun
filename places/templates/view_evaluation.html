@@ -8,9 +8,9 @@
         {% for evaluation in evaluations %}
             <div class="card" style="width: 18rem;">
                 <div class="card-body">
-                    <h5 class="card-title">Puntuación: {{ evaluation.score }} de 5</h5>
-                    <p>Precio: {{ evaluation.price }} de 3</p>
-                    <p>Reseña: {{ evaluation.comment }}</p>
+                    <h5>Puntuación: {{ evaluation.score }} de 5</h5>
+                    <h5>Precio: {{ evaluation.price }} de 3</h5>
+                    <h7>Comentario de {{evaluation.user.username}}: {{ evaluation.comment }}</h7>
                     <br><br>
                     <a href="{% url 'edit_evaluation' %}" class="card-link">Editar</a>
                     <a href="{% url 'delete_evaluation' %}" class="card-link">Borrar</a>

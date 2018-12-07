@@ -100,12 +100,12 @@ def edit_evaluation(request, place_id):
     else:
         return redirect('login')
 
-def delete_evaluation(request):
-    #place = Place.objects.get(id=eval_id)
+def delete_evaluation(request, evalplace_id):
+    evaluation= EvalPlace.objects.get(id=evalplace_id)
     user = request.user
     if request.user.is_authenticated:
-        if user.id == place.user.id:
-            place.delete()
+        if user.id == evalplace.user.id:
+            evaluation.delete()
             return render(request, 'delete_evaluation.html')
         else:
             return render(request, 'delete_error.html')
