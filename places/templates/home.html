@@ -1,28 +1,32 @@
 {% extends 'base.html' %}
 
-{% block title %} 
-Inicio
-{% endblock %}
+{% block title %} Tacomun {% endblock %}
 
 {% block content %}
     {% if user.is_authenticated %}
         <h2>Hola {{user.username }}!</h2>
-        <button><a class="btn btn-primary" href="{% url 'logout' %}" role="button">Cerrar sesión</a></button>
-        <button><a class="btn btn-primary" href="place/create/" role="button">Dar de alta un puesto de garnachas</a></button>
-        <br>
+        <a class="btn btn-danger" href="{% url 'logout' %}" role="button">Cerrar sesión</a>
+        <a class="btn btn-primary" href="place/create/" role="button">Dar de alta un puesto de garnachas</a>
+        <br><br>
         {% if places%}
+            <div class="row">
             {% for place in places %}
-                <br>
-                <ul>
-                    <li>{{place.name}} en {{place.city}}</li>
-                    <button><a class="btn btn-primary btn-sm" href="place/detail/{{place.id}}" role="button">detalles</a></button>
-                </ul>
+                <div class="col-sm-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">{{place.name}}</h5>
+                            <p class="card-text">{{place.city}}</p>
+                            <a class="btn btn-info btn-sm" href="place/detail/{{place.id}}" role="button">detalles</a>
+                        </div>
+                    </div>
+                </div>
             {% endfor %}
+            </div>
         {% endif %}
     {% else %}
-        <h2>Aún no has iniciado sesión</h2>
-        <button><a class="btn btn-primary" href="{% url 'login' %}" role="button">Iniciar sesión</a></button>
+        <h2>Inicia sesión</h2>
+        <a class="btn btn-success btn-lg" href="{% url 'login' %}" role="button">Iniciar sesión</a>
         <p> </p> 
-        <button><a class="btn btn-primary" href="{% url 'signup' %}" role="button">Registrar nuevo usuario</a></button>
+        <a class="btn btn-primary btn-sm" href="{% url 'signup' %}" role="button">Registrar nuevo usuario</a>
     {% endif %}
 {% endblock %}

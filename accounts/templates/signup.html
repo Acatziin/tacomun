@@ -1,8 +1,15 @@
-<h2>Crear nuevo usuario</h2>
+{% extends 'base.html' %}
 
+{% block title %} Tacomun {% endblock %}
+
+{% block content %}
+
+<h2>Crear nuevo usuario</h2>
+<br><br>
 <form method='post'>
     {%csrf_token %}
     {{ form.as_p}}
-    <button><a class="btn btn-primary" role="button" type = "submit">Crear</a></button>
+    <button type="submit" class="btn btn-primary">Crear</button>
 </form>
 
+{% endblock %}

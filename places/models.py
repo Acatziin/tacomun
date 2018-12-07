@@ -50,4 +50,4 @@ class EvalPlace(models.Model):
     comment = models.TextField()
 
     def __str__(self):
-        return 'score: {}'.format(self.score)
+        return self.score

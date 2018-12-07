@@ -1,4 +1,4 @@
-from .models import Place
+from .models import Place, EvalPlace
 from django import forms
 
 class PlaceForm(forms.ModelForm):
@@ -14,3 +14,13 @@ class PlaceForm(forms.ModelForm):
             'postal_code'
         )
 
+class EvaluationForm(forms.ModelForm):
+
+    class Meta:
+        model = EvalPlace
+
+        fields = (
+            'score',
+            'price',
+            'comment'
+        )

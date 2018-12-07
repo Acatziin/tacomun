@@ -5,6 +5,7 @@
 {% block content %}
 
 
+
 {% if form.error %}
     {% for field in errors %}
     <ul>
@@ -16,9 +17,10 @@
 {% endif %}
     
 <form method="POST">
+    <h5>{{ place.name }}</h5>
     {%csrf_token %}
     {{ form.as_p}}
-    <button class="btn btn-primary" type = "submit">Dar de alta</button>
+    <button class="btn btn-primary" type = "submit">Submit</button>
     
 </form>
 

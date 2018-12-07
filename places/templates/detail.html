@@ -1,17 +1,24 @@
 {% extends 'base.html' %}
 
-{% block title %} Hola {% endblock %}
+{% block title %} Tacomun {% endblock %}
 
 {% block content %}
-    <p></p> 
-    <h3>{{ place.name}}</h3>
+    <div class="card" style="width: 18rem;">
+        <div class="card-body">
+            <h5 class="card-title">{{ place.name}}</h5>
+            {% for place.category in categories %}
+                <h6 class="card-subtitle mb-2 text-muted">{{ place.category.name }}</h6>
+            {% endfor %}
+            <p>En {{ place.city }}, {{ place.state }}.</p>
+            <p>C.P. {{ place.postal_code }}</p>
+            <a class="btn btn-info btn-sm" href="{% url 'add_evaluation' place.id %}" role="button">Agrega una evaluación</a>
+            <br><br>
+            <a href="{% url 'edit_place' place.id %}" class="card-link">Editar</a>
+            <a href="{% url 'delete_place' place.id %}" class="card-link">Borrar</a>
+        </div>
+    </div>
+    
+    <br><a href="{% url 'index' %}" class="btn btn-primary btn-lg" role="button">Inicio</a>
 
-    <p>{{ place.state }}</p>
-    <p>{{ place.city }}</p>
-    <p>C.P. {{ place.postal_code }}</p>
-
-    <button><a href="{% url 'edit_place' place.id %}">Editar</a></button>
-    <button><a href="{% url 'delete_place' place.id %}">Borrar</a></button>
-    <br><button><a href="{% url 'index' %}">Inicio</a></button>
 {% endblock %}
 
