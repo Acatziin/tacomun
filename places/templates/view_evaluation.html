@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %} Tacomun {% endblock %}
+
+{% block content %}
+    {% if evaluations %}
+    <div class="row">
+        {% for evaluation in evaluations %}
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">Puntuación: {{ evaluation.score }} de 5</h5>
+                    <p>Precio: {{ evaluation.price }} de 3</p>
+                    <p>Reseña: {{ evaluation.comment }}</p>
+                    <br><br>
+                    <a href="{% url 'edit_evaluation' %}" class="card-link">Editar</a>
+                    <a href="{% url 'delete_evaluation' %}" class="card-link">Borrar</a>
+                </div>                
+            </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    <br><a href="{% url 'index' %}" class="btn btn-primary btn-lg" role="button">Inicio</a>
+
+{% endblock %}

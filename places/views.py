@@ -31,6 +31,7 @@ def create_place(request):
                 place = form.save(commit = False)
                 place.user = request.user
                 place.save()
+                form.save_m2m()
                 return redirect('index')
         return render(request, 'create_place.html', {'form':form})  
     else:
@@ -42,7 +43,7 @@ def edit_place(request, place_id):
         if request.method == 'POST':
             form = PlaceForm(request.POST, instance=place)
             if form.is_valid():
-                place = form.save(commit = False)
+                place = form.save()
                 place.save()
                 return redirect('index')
         else:
@@ -74,3 +75,42 @@ def add_evaluation(request, place_id):
         return render(request, 'add_evaluation.html', {'form':form})  
     else:
         return render(request, 'home.html')
+
+def view_evaluation(request,place_id):
+    place = Place.objects.get(id=place_id)
+    evaluations = EvalPlace.objects.filter(place_id = place.id)
+    context = {
+        'evaluations' : evaluations
+    }
+    return render(request, 'view_evaluation.html', context)
+
+def edit_evaluation(request, place_id):
+    place = Place.objects.get(id=place_id)
+
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            form = EvaluationForm(request.POST, instance=place)
+            if form.is_valid():
+                place = form.save()
+                place.save()
+                return redirect('index')
+        else:
+            form = EvaluationForm(instance=place)
+        return render(request, 'edit_evaluation.html', {'form':form})  
+    else:
+        return redirect('login')
+
+def delete_evaluation(request):
+    #place = Place.objects.get(id=eval_id)
+    user = request.user
+    if request.user.is_authenticated:
+        if user.id == place.user.id:
+            place.delete()
+            return render(request, 'delete_evaluation.html')
+        else:
+            return render(request, 'delete_error.html')
+    else:
+        return redirect('login')        
+
+# <a href="{% url 'edit_evaluation' place.id %}" class="card-link">Editar</a>
+# <a href="{% url 'delete_evaluation place.id %}" class="card-link">Borrar</a>

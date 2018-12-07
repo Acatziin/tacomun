@@ -6,12 +6,18 @@
     <div class="card" style="width: 18rem;">
         <div class="card-body">
             <h5 class="card-title">{{ place.name}}</h5>
-            {% for place.category in categories %}
-                <h6 class="card-subtitle mb-2 text-muted">{{ place.category.name }}</h6>
-            {% endfor %}
+            <ul class="nav">
+                {% for category in place.categories.all %}
+                <li class="nav-item">
+                    <h7 class="badge badge-secondary">{{ category.name }} </h7>
+                </li>
+                {% endfor %}
+            </ul>
             <p>En {{ place.city }}, {{ place.state }}.</p>
             <p>C.P. {{ place.postal_code }}</p>
             <a class="btn btn-info btn-sm" href="{% url 'add_evaluation' place.id %}" role="button">Agrega una evaluación</a>
+            <br><br>
+            <a class="btn btn-info btn-sm" href="{% url 'view_evaluation' place.id %}" role="button">Ver las evaluaciones de este puesto</a>
             <br><br>
             <a href="{% url 'edit_place' place.id %}" class="card-link">Editar</a>
             <a href="{% url 'delete_place' place.id %}" class="card-link">Borrar</a>

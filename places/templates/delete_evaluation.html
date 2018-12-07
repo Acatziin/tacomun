@@ -1,0 +1,15 @@
+{% if form.error %}
+    {% for field in errors %}
+    <ul>
+        {% for error in fiel.errors %}
+        <li>{{ error | escape</li>
+        {% endfor %}
+    </ul>
+    {% endfor %}
+{% else %}    
+    <h2>Nota borrada con éxito</h2>
+{% endif %}
+
+
+
+<button><a class="btn btn-primary btn-lg" role="button"href="{% url 'index' %}">Inicio</a></button>
