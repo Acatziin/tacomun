@@ -79,38 +79,40 @@ def add_evaluation(request, place_id):
 def view_evaluation(request,place_id):
     place = Place.objects.get(id=place_id)
     evaluations = EvalPlace.objects.filter(place_id = place.id)
+    user = request.user
     context = {
-        'evaluations' : evaluations
+        'evaluations' : evaluations,
+        'user' : user,
+        'place' : place
     }
     return render(request, 'view_evaluation.html', context)
 
-def edit_evaluation(request, place_id):
-    place = Place.objects.get(id=place_id)
-
+def edit_evaluation(request, evalplace_id):
+    evaluation = EvalPlace.objects.get(id=evalplace_id)
     if request.user.is_authenticated:
         if request.method == 'POST':
-            form = EvaluationForm(request.POST, instance=place)
+            form = EvaluationForm(request.POST, instance=evaluation)
             if form.is_valid():
-                place = form.save()
-                place.save()
+                evaluation = form.save()
+                evaluation.save()
                 return redirect('index')
         else:
-            form = EvaluationForm(instance=place)
+            form = EvaluationForm(instance=evaluation)
         return render(request, 'edit_evaluation.html', {'form':form})  
     else:
         return redirect('login')
 
 def delete_evaluation(request, evalplace_id):
-    evaluation= EvalPlace.objects.get(id=evalplace_id)
-    user = request.user
+    evaluation = EvalPlace.objects.get(id=evalplace_id)
     if request.user.is_authenticated:
-        if user.id == evalplace.user.id:
-            evaluation.delete()
-            return render(request, 'delete_evaluation.html')
-        else:
-            return render(request, 'delete_error.html')
+        evaluation.delete()
+        return render(request, 'delete_evaluation.html')
     else:
         return redirect('login')        
 
-# <a href="{% url 'edit_evaluation' place.id %}" class="card-link">Editar</a>
-# <a href="{% url 'delete_evaluation place.id %}" class="card-link">Borrar</a>
+    place = Place.objects.get(id=place_id)
+    if request.user.is_authenticated:
+        place.delete()
+        return render(request, 'delete_evaluation.html')
+    else:
+        return redirect('login')  

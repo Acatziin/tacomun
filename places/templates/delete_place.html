@@ -1,3 +1,9 @@
+{% extends 'base.html' %}
+
+{% block title %} Tacomun {% endblock %}
+
+{% block content %}
+
 {% if form.error %}
     {% for field in errors %}
     <ul>
@@ -10,6 +16,6 @@
     <h2>Changarro borrado con éxito</h2>
 {% endif %}
 
+<a class="btn btn-primary btn-lg" role="button"href="{% url 'index' %}">Inicio</a>
 
-
-<button><a class="btn btn-primary btn-lg" role="button"href="{% url 'index' %}">Inicio</a></button>
+{% endblock %}
